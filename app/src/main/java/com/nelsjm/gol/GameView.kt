@@ -5,6 +5,7 @@ import android.graphics.Canvas
 import android.util.AttributeSet
 import android.view.SurfaceHolder
 import android.view.SurfaceView
+import kotlin.random.Random
 
 
 class GameView(context: Context, attributes: AttributeSet) : SurfaceView(context, attributes), SurfaceHolder.Callback {
@@ -21,12 +22,14 @@ class GameView(context: Context, attributes: AttributeSet) : SurfaceView(context
 
     override fun surfaceCreated(p0: SurfaceHolder?) {
         if (cells == null) {
+            val rnd = Random.Default
+
             val rowWidth = this.width - 100
             val rowCellCount = rowWidth/50
 
             val rowCount = (this.height - 100) / 50
 
-            cells = Array(rowCount) {r -> Array(rowCellCount) { i ->  Cell(r, i,i * 50f + 50f, r * 50f + 50f, 50f, 50f, ((i+r) % 2 )== 0) } }
+            cells = Array(rowCount) {r -> Array(rowCellCount) { i ->  Cell(r, i,i * 50f + 50f, r * 50f + 50f, 50f, 50f, (rnd.nextInt() % 2 )== 0) } }
 
         }
 
